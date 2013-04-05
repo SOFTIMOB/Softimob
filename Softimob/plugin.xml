@@ -16,42 +16,149 @@
       <perspective
             name="Perspective"
             class="softimob.Perspective"
-            id="Softimob.perspective">
+            id="SoftImob.perspective">
       </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.views">
-      <view
-            name="View"
-            class="softimob.View"
-            id="Softimob.view">
-      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="*">
-         <view
-               standalone="true"
-               minimized="false"
-               relative="org.eclipse.ui.editorss"
-               relationship="left"
-               id="Softimob.view">
-         </view>
-      </perspectiveExtension>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
+
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu">
          <menu
-               label="File">
+               label="Cadastro">
             <command
-                  commandId="org.eclipse.ui.file.exit"
-                  label="Exit">
+                  commandId="softImob.cmdChave"
+                  label="Chave"
+                  style="push">
+            </command>
+            <command
+                  commandId="softImob.cmdImovel"
+                  label="Imóvel"
+                  style="push">
+            </command>
+            <command
+                  commandId="softImob.cmdCliente"
+                  label="Cliente"
+                  style="push">
+            </command>
+            <command
+                  commandId="softImob.cmdPlaca"
+                  label="Placa"
+                  style="push">
+            </command>
+            <command
+                  commandId="softImob.cmdComodo"
+                  label="Cômodo"
+                  style="push">
+            </command>
+            <command
+                  commandId="softImob.cmdFuncionario"
+                  label="Funcionário"
+                  style="push">
+            </command>
+            <command
+                  commandId="softImob.cmdTipoImovel"
+                  label="Tipo imóvel"
+                  style="push">
             </command>
          </menu>
       </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="editor.ChaveEditor"
+            id="editor.ChaveEditor"
+            name="Cadastro Chave">
+      </editor>
+      <editor
+            class="editor.TipoImovelEditor"
+            id="editor.TipoImovelEditor"
+            name="Cadastro Tipo de Imóvel">
+      </editor>
+      <editor
+            class="editor.FuncionarioEditor"
+            id="editor.FuncionarioEditor"
+            name="Cadastro Funcionário">
+      </editor>
+      <editor
+            class="editor.PlacaEditor"
+            id="editor.PlacaEditor"
+            name="Cadastro Placa">
+      </editor>
+      <editor
+            class="editor.ClienteEditor"
+            id="editor.ClienteEditor"
+            name="Cadastro Cliente">
+      </editor>
+      <editor
+            class="editor.ComodoEditor"
+            id="editor.ComodoEditor"
+            name="Cadastro Cômodo">
+      </editor>
+      <editor
+            class="editor.ImovelEditor"
+            id="editor.ImovelEditor"
+            name="Cadastro Imóvel">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="editorCommand.CmdChave"
+            id="softImob.cmdChave"
+            name="Chave">
+      </command>
+      <command
+            defaultHandler="editorCommand.CmdCliente"
+            id="softImob.cmdCliente"
+            name="Cliente">
+      </command>
+      <command
+            defaultHandler="editorCommand.CmdPlaca"
+            id="softImob.cmdPlaca"
+            name="Placa">
+      </command>
+      <command
+            defaultHandler="editorCommand.CmdComodo"
+            id="softImob.cmdComodo"
+            name="Cômodo">
+      </command>
+      <command
+            defaultHandler="editorCommand.CmdFuncionario"
+            id="softImob.cmdFuncionario"
+            name="Funcionário">
+      </command>
+      <command
+            defaultHandler="editorCommand.CmdTipoImovel"
+            id="softImob.cmdTipoImovel"
+            name="Tipo Imóvel">
+      </command>
+      <command
+            defaultHandler="editorCommand.CmdImovel"
+            id="softImob.cmdImovel"
+            name="Imóvel">
+      </command>
+      <command
+            defaultHandler="command.CmdOpenShortcutEditorsDialog"
+            description="Abrir dialog de editors"
+            id="command.cmdOpenShortcutEditorsDialog"
+            name="Abrir dialog de editors">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="command.cmdOpenShortcutEditorsDialog"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="F1">
+      </key>
    </extension>
 
 </plugin>

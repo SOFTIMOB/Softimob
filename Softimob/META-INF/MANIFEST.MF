@@ -1,10 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Softimob
-Bundle-SymbolicName: Softimob; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Name: SoftImob
+Bundle-SymbolicName: SoftImob; singleton:=true
+Bundle-Version: 0.0.0.1
 Bundle-Activator: softimob.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.core.databinding,
+ org.eclipse.core.databinding.beans,
+ org.eclipse.core.databinding.observable,
+ org.eclipse.core.databinding.property,
+ org.eclipse.jface.databinding,
+ org.apache.commons.lang;bundle-version="2.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ClassPath: lib/de.ralfebert.rcputils.jar,
+ .

@@ -19,9 +19,10 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	public void preWindowOpen() {
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
-		configurer.setInitialSize(new Point(400, 300));
+		configurer.setInitialSize(new Point(1024, 690));
 		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(false);
-		configurer.setTitle("RCP Application");
+		configurer.setTitle("SoftImob");
 	}
+	
 }
