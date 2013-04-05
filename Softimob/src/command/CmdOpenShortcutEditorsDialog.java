@@ -1,9 +1,9 @@
 package command;
 
+import helper.ShellHelper;
+
 import java.util.Arrays;
 import java.util.List;
-
-import helper.ShellHelper;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -13,13 +13,9 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
-import org.eclipse.ui.views.IViewDescriptor;
-import org.eclipse.ui.views.IViewRegistry;
 
 import editorInput.GenericEditorInput;
 
@@ -52,7 +48,7 @@ public class CmdOpenShortcutEditorsDialog extends AbstractHandler {
 			String id = firstResult.getAttribute("id");
 			
 			try {
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(new GenericEditorInput<>(), id);
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(new GenericEditorInput(), id);
 			} catch (PartInitException e) {
 				e.printStackTrace();
 			}
