@@ -1,6 +1,8 @@
 package modelo;
 
-public class Cliente {
+import java.util.List;
+
+public class Cliente implements Pessoa{
 
 	private String nome;
 	
@@ -17,6 +19,8 @@ public class Cliente {
 	private String telefone;
 	
 	private String email;
+	
+	private String filiacao;
 	
 	public Cliente(String nome) {
 		this.nome = nome;

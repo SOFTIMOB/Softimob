@@ -8,6 +8,8 @@ public class Imovel {
 
 	public static final int ALUGAR = 0;
 	public static final int VENDER = 1;
+	public static final int VENDIDO = 2;
+	public static final int ALUGADO = 3;
 	
 	private String endereco;
 	
@@ -28,6 +30,10 @@ public class Imovel {
 	private TipoImovel tipo;
 	
 	private Cliente proprietario;
+	
+	private Integer status;
+	
+	private Contrato contratoAluguelVenda;
 
 	public Cliente getProprietario() {
 		return proprietario;
