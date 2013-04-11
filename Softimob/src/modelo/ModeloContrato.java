@@ -1,7 +1,6 @@
 package modelo;
 
-
-public class Contrato {
+public class ModeloContrato {
 
 	private String tipo;
 	

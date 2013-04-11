@@ -8,8 +8,6 @@ public class Comissao {
 	
 	private Funcionario vendedor;
 	
-	private Imobiliaria imobiliaria;
-	
 	private BigDecimal valor;
 	
 }

@@ -8,7 +8,7 @@ public class VendaAluguel {
 	public static final int VENDA = 0;
 	public static final int ALUGUEL = 1;
 	
-	private Contrato contrato;
+	private ModeloContrato contrato;
 	
 	private Imovel imovel;
 	

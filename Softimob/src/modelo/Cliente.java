@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.List;
 
-public class Cliente implements Pessoa{
+public class Cliente {
 
 	private String nome;
 	

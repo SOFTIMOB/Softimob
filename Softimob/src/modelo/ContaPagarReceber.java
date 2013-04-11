@@ -3,7 +3,7 @@ package modelo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Conta {
+public class ContaPagarReceber {
 
 	public static int PAGAR = 0;
 	public static int RECEBER = 1;

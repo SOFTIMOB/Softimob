@@ -33,7 +33,7 @@ public class Imovel {
 	
 	private Integer status;
 	
-	private Contrato contratoAluguelVenda;
+	private ModeloContrato contratoAluguelVenda;
 
 	public Cliente getProprietario() {
 		return proprietario;
