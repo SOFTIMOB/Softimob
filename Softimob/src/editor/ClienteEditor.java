@@ -6,6 +6,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.swt.widgets.Group;
 
 public class ClienteEditor extends SoftimobEditor {
 	
@@ -15,93 +18,125 @@ public class ClienteEditor extends SoftimobEditor {
 	private Text text_1;
 	private Text text_2;
 	private Text text_3;
-	private Text text_4;
 	private Text text_5;
-	private Text text_6;
 	private Text text_7;
+	private Text text_4;
+	private Text text_6;
 	private Text text_8;
 	public ClienteEditor() {
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
-		parent.setLayout(new GridLayout(1, false));
+	public void afterCreatePartControl(Composite parent) {
+		parent.setLayout(new GridLayout(2, false));
+		parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		
-		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(2, false));
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
-		
-		Label lblNome = new Label(composite, SWT.NONE);
+		Label lblNome = new Label(parent, SWT.NONE);
 		lblNome.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblNome.setText("Nome");
 		
-		text = new Text(composite, SWT.BORDER);
+		text = new Text(parent, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblEndereo = new Label(composite, SWT.NONE);
+		Label lblEndereo = new Label(parent, SWT.NONE);
 		lblEndereo.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblEndereo.setText("Endereço");
+		lblEndereo.setText("CPF");
 		
-		text_1 = new Text(composite, SWT.BORDER);
+		text_1 = new Text(parent, SWT.BORDER);
 		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblCep = new Label(composite, SWT.NONE);
+		Label lblCep = new Label(parent, SWT.NONE);
 		lblCep.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCep.setText("CEP");
+		lblCep.setText("RG");
 		
-		text_2 = new Text(composite, SWT.BORDER);
+		text_2 = new Text(parent, SWT.BORDER);
 		text_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblRg = new Label(composite, SWT.NONE);
+		Label lblRg = new Label(parent, SWT.NONE);
 		lblRg.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblRg.setText("RG");
+		lblRg.setText("Filiação");
 		
-		text_3 = new Text(composite, SWT.BORDER);
+		text_3 = new Text(parent, SWT.BORDER);
 		text_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblCpf = new Label(composite, SWT.NONE);
+		Label lblCpf = new Label(parent, SWT.NONE);
 		lblCpf.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCpf.setText("CPF");
+		lblCpf.setText("Estado Civil");
 		
-		text_4 = new Text(composite, SWT.BORDER);
-		text_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
+		Combo combo = comboViewer.getCombo();
+		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblNacionalidade = new Label(composite, SWT.NONE);
+		Label lblNacionalidade = new Label(parent, SWT.NONE);
 		lblNacionalidade.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblNacionalidade.setText("Nacionalidade");
 		
-		text_5 = new Text(composite, SWT.BORDER);
+		text_5 = new Text(parent, SWT.BORDER);
 		text_5.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblEstadoCivil = new Label(composite, SWT.NONE);
-		lblEstadoCivil.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblEstadoCivil.setText("Estado civil");
+		Label lblTelefone_1 = new Label(parent, SWT.NONE);
+		lblTelefone_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblTelefone_1.setText("Telefone");
 		
-		text_6 = new Text(composite, SWT.BORDER);
+		text_4 = new Text(parent, SWT.BORDER);
+		text_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblCelular = new Label(parent, SWT.NONE);
+		lblCelular.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblCelular.setText("Celular");
+		
+		text_6 = new Text(parent, SWT.BORDER);
 		text_6.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblEmail = new Label(composite, SWT.NONE);
+		Label lblEmail = new Label(parent, SWT.NONE);
 		lblEmail.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblEmail.setText("E-mail");
 		
-		text_7 = new Text(composite, SWT.BORDER);
+		text_7 = new Text(parent, SWT.BORDER);
 		text_7.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblTelefone = new Label(composite, SWT.NONE);
-		lblTelefone.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblTelefone.setText("Telefone");
+		Group grpEndereo = new Group(parent, SWT.NONE);
+		grpEndereo.setText("Endereço");
+		grpEndereo.setLayout(new GridLayout(2, false));
+		grpEndereo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 		
-		text_8 = new Text(composite, SWT.BORDER);
+		Label lblCep_1 = new Label(grpEndereo, SWT.NONE);
+		lblCep_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblCep_1.setText("CEP");
+		
+		text_8 = new Text(grpEndereo, SWT.BORDER);
+		text_8.setText("");
 		text_8.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		super.createPartControl(parent);		
+		Label lblUf = new Label(grpEndereo, SWT.NONE);
+		lblUf.setText("UF");
+		new Label(grpEndereo, SWT.NONE);
+		
+		Label lblCidade = new Label(grpEndereo, SWT.NONE);
+		lblCidade.setText("Cidade");
+		new Label(grpEndereo, SWT.NONE);
+		
+		Label lblBairro = new Label(grpEndereo, SWT.NONE);
+		lblBairro.setText("Bairro");
+		new Label(grpEndereo, SWT.NONE);
+		
+		Label lblRua = new Label(grpEndereo, SWT.NONE);
+		lblRua.setText("Rua");
+		new Label(grpEndereo, SWT.NONE);
+		
+		Label lblNmero = new Label(grpEndereo, SWT.NONE);
+		lblNmero.setText("Número");
+		new Label(grpEndereo, SWT.NONE);
+		
+		Label lblComplemento = new Label(grpEndereo, SWT.NONE);
+		lblComplemento.setText("Complemento");
+		new Label(grpEndereo, SWT.NONE);
 	}
+	
 
 	@Override
 	protected void salvar() {
-		// TODO Auto-generated method stub
-		
 	}
-	
+
 	
 }

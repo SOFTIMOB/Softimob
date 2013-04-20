@@ -18,7 +18,13 @@ public class ComodoEditor extends SoftimobEditor{
 	}
 	
 	@Override
-	public void createPartControl(Composite parent) {
+	protected void salvar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void afterCreatePartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -35,14 +41,5 @@ public class ComodoEditor extends SoftimobEditor{
 		
 		Button btnPradicionado = new Button(composite, SWT.CHECK);
 		btnPradicionado.setText("Pré-adicionado");
-		
-		super.createPartControl(parent);
-		
-	}
-
-	@Override
-	protected void salvar() {
-		// TODO Auto-generated method stub
-		
 	}
 }

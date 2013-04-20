@@ -1,6 +1,7 @@
 package modelo;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 public class Proposta {
 
@@ -16,5 +17,9 @@ public class Proposta {
 	private Imovel imovel;
 	
 	private Cliente comprador;
+	
+	private Date data;
+	
+	private Funcionario funcionario;
 	
 }

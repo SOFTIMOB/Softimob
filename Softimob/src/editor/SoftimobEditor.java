@@ -20,13 +20,16 @@ public abstract class SoftimobEditor extends EditorPart {
 	public SoftimobEditor() {
 	}
 
-	/**
-	 * Create contents of the editor part.
-	 * @param parent
-	 */
 	@Override
 	public void createPartControl(Composite parent) {
-		Composite cpOpcoes = new Composite(parent, SWT.NONE);
+		
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayout(new GridLayout(1, false));
+		
+		Composite cpPrincipal = new Composite(composite, SWT.NONE);
+		cpPrincipal.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		Composite cpOpcoes = new Composite(composite, SWT.NONE);
 		cpOpcoes.setLayout(new GridLayout(2, false));
 		cpOpcoes.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
@@ -53,8 +56,12 @@ public abstract class SoftimobEditor extends EditorPart {
 		btnCancelar.setText("Cancelar");
 		
 		EnterHelper.addEnterNextControlToGroupOrComposite(parent);
+		
+		afterCreatePartControl(cpPrincipal);
 	}
 
+	public abstract void afterCreatePartControl(Composite parent);
+	
 	protected abstract void salvar();
 
 	@Override

@@ -16,7 +16,7 @@ public class PlacaEditor extends SoftimobEditor{
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
+	public void afterCreatePartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -36,13 +36,9 @@ public class PlacaEditor extends SoftimobEditor{
 		
 		text_1 = new Text(composite, SWT.BORDER);
 		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		super.createPartControl(parent);
 	}
 
 	@Override
 	protected void salvar() {
-		// TODO Auto-generated method stub
-		
 	}
 }

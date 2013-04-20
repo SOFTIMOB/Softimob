@@ -19,7 +19,13 @@ public class FecharChamadoReformaEditor extends SoftimobEditor {
 	private Text text_2;
 
 	@Override
-	public void createPartControl(Composite parent) {
+	protected void salvar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void afterCreatePartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -53,13 +59,6 @@ public class FecharChamadoReformaEditor extends SoftimobEditor {
 		Button btnReformado = new Button(composite, SWT.CHECK);
 		btnReformado.setText("Reformado");
 
-		super.createPartControl(parent);
-	}
-
-	@Override
-	protected void salvar() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

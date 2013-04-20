@@ -37,7 +37,7 @@ public class ImovelEditor extends SoftimobEditor{
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
+	public void afterCreatePartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -131,8 +131,6 @@ public class ImovelEditor extends SoftimobEditor{
 		value.setValue(new Imovel());
 		
 		initDataBindings();
-
-		super.createPartControl(parent);
 	}
 	
 	@Override

@@ -1,14 +1,5 @@
 package editor;
 
-import java.util.List;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-
-//import org.docx4j.openpackaging.contenttype.ContentTypeManager;
-//import org.docx4j.openpackaging.exceptions.Docx4JException;
-//import org.docx4j.openpackaging.packages.PresentationMLPackage;
-//import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -25,28 +16,6 @@ public class ChaveEditor extends SoftimobEditor {
 	public ChaveEditor() {
 	}
 
-	@Override
-	public void createPartControl(Composite parent) {
-		parent.setLayout(new GridLayout(1, false));
-		
-		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(2, false));
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
-		
-		Label lblNmero = new Label(composite, SWT.NONE);
-		lblNmero.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblNmero.setText("Número");
-		
-		text = new Text(composite, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblImvel = new Label(composite, SWT.NONE);
-		lblImvel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblImvel.setText("Imóvel");
-		
-		text_1 = new Text(composite, SWT.BORDER);
-		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
 //		String inputfilepath = "C:\\Users\\Seven\\Desktop\\duvidas.docx";
 //		WordprocessingMLPackage load;
 //		try {
@@ -77,14 +46,28 @@ public class ChaveEditor extends SoftimobEditor {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+	@Override
+	public void afterCreatePartControl(Composite parent) {
+		parent.setLayout(new GridLayout(2, false));
+		parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		
-		super.createPartControl(parent);
+		Label lblNmero = new Label(parent, SWT.NONE);
+		lblNmero.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNmero.setText("Número");
+		
+		text = new Text(parent, SWT.BORDER);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblImvel = new Label(parent, SWT.NONE);
+		lblImvel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblImvel.setText("Imóvel");
+		
+		text_1 = new Text(parent, SWT.BORDER);
+		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 	}
-
+		
 	@Override
 	protected void salvar() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

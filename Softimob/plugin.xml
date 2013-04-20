@@ -104,6 +104,11 @@
             id="editor.ImovelEditor"
             name="Cadastro Imóvel">
       </editor>
+      <editor
+            class="editor.ContaPagarReceberEditor"
+            id="editor.ContaPagarReceberEditor"
+            name="New EditorPart">
+      </editor>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

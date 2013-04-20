@@ -1,6 +1,6 @@
 package modelo;
 
-public class TipoConta {
+public class OrigemConta {
 
 	private String descricao;
 

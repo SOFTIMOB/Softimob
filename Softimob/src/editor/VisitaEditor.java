@@ -18,7 +18,7 @@ public class VisitaEditor extends SoftimobEditor{
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
+	public void afterCreatePartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -47,8 +47,6 @@ public class VisitaEditor extends SoftimobEditor{
 		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_text.heightHint = 79;
 		text.setLayoutData(gd_text);
-		
-		super.createPartControl(parent);
 	}
 
 	@Override

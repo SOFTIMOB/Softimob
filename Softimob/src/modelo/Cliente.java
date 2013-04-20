@@ -1,6 +1,6 @@
 package modelo;
 
-import java.util.List;
+import java.util.Date;
 
 public class Cliente {
 
@@ -21,6 +21,8 @@ public class Cliente {
 	private String email;
 	
 	private String filiacao;
+	
+	private Date dataNascimento;
 	
 	public Cliente(String nome) {
 		this.nome = nome;
