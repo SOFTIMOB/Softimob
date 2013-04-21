@@ -37,6 +37,13 @@ import de.ralfebert.rcputils.tables.TableViewerBuilder;
 
 import widget.imovel.ImovelXViewer;
 import widget.imovel.ImovelXViewerFactory;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.forms.widgets.ExpandableComposite;
+import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.swt.custom.SashForm;
 
 public class ChaveEditor extends SoftimobEditor {
 	
@@ -44,6 +51,7 @@ public class ChaveEditor extends SoftimobEditor {
 	private Text text;
 	private Text text_1;
 	private Text txtBusca;
+	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 	
 	public ChaveEditor() {
 	}
@@ -99,29 +107,48 @@ public class ChaveEditor extends SoftimobEditor {
 		c3.setNome("Joana");
 		c3.setCpf("73489274");
 		c3.setRg("732468");
+		parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		parent.setLayout(new GridLayout(1, false));
 		
-//		TableViewerBuilder tvb = WidgetHelper.createTableWithFilter(parent, atributos);
+		SashForm sashForm = new SashForm(parent, SWT.NONE);
+		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		formToolkit.adapt(sashForm);
+		formToolkit.paintBordersFor(sashForm);
+		
+		Composite composite_1 = new Composite(sashForm, SWT.NONE);
+		formToolkit.adapt(composite_1);
+		formToolkit.paintBordersFor(composite_1);
+		composite_1.setLayout(new GridLayout(1, false));
+		
+		ExpandableComposite xpndblcmpstNewExpandablecomposite = formToolkit.createExpandableComposite(composite_1, ExpandableComposite.TWISTIE);
+		xpndblcmpstNewExpandablecomposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		xpndblcmpstNewExpandablecomposite.setSize(152, 30);
+		formToolkit.paintBordersFor(xpndblcmpstNewExpandablecomposite);
+		xpndblcmpstNewExpandablecomposite.setText("Filtro de cômodos");
+		xpndblcmpstNewExpandablecomposite.setExpanded(true);
+		
+		Composite composite = formToolkit.createComposite(xpndblcmpstNewExpandablecomposite, SWT.NONE);
+		formToolkit.paintBordersFor(composite);
+		xpndblcmpstNewExpandablecomposite.setClient(composite);
+		composite.setLayout(new GridLayout(1, false));
+		sashForm.setWeights(new int[] {1});
+		new Label(parent, SWT.NONE);
 
-//		tvb.setInput(Arrays.asList(c1, c2, c3));
-		
-//		parent.setLayout(new GridLayout(2, false));
-//		parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
-//
-//		ImovelXViewer xViewer = new ImovelXViewer(parent, SWT.BORDER | SWT.FILL | SWT.FULL_SELECTION);
-//		//não mostra o menu no clique do botão direito
-//		xViewer.getMenuManager().dispose();
-//		//não mostra o menu de filtro e tal
-//		xViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
-//
-//		List<XViewerColumn> columns = new ImovelXViewerFactory().getColumns();
-//		String[] colunas = new String[columns.size()];
-//		for (int i = 0; i < columns.size(); i++) {
-//			colunas[i] = columns.get(i).getName();
-//		}
-//
-//		xViewer.setColumnProperties(colunas);
-//
-//		xViewer.setInput(cadastrarImoveis());
+		ImovelXViewer xViewer = new ImovelXViewer(parent, SWT.BORDER | SWT.FILL | SWT.FULL_SELECTION);
+		Tree tree = xViewer.getTree();
+		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		//não mostra o menu no clique do botão direito
+		xViewer.getMenuManager().dispose();
+
+		List<XViewerColumn> columns = new ImovelXViewerFactory().getColumns();
+		String[] colunas = new String[columns.size()];
+		for (int i = 0; i < columns.size(); i++) {
+			colunas[i] = columns.get(i).getName();
+		}
+
+		xViewer.setColumnProperties(colunas);
+
+		xViewer.setInput(cadastrarImoveis());
 //		
 //		
 //		Label lblNmero = new Label(parent, SWT.NONE);
