@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.databinding.observable,
  org.eclipse.core.databinding.property,
  org.eclipse.jface.databinding,
- org.apache.commons.lang;bundle-version="2.4.0"
+ org.apache.commons.lang;bundle-version="2.4.0",
+ org.eclipse.ui.forms;bundle-version="3.5.101"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
@@ -38,4 +39,5 @@ Bundle-ClassPath: .,
  lib/javax.el-api-2.2.4.jar,
  lib/jboss-logging-3.1.1.GA.jar,
  lib/validation-api-1.1.0.CR3.jar,
- lib/postgresql-9.1-901.jdbc3.jar
+ lib/postgresql-9.1-901.jdbc3.jar,
+ lib/org.eclipse.nebula.widgets.xviewer_0.9.9.201304181950.jar

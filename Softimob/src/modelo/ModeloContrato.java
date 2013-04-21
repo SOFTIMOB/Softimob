@@ -2,7 +2,7 @@ package modelo;
 
 public class ModeloContrato {
 
-	private String tipo;
+	private String descricao;
 	
 	private String modelo;
 	

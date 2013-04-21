@@ -10,33 +10,28 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Comodo implements Serializable{
+public class TipoImovelTipoComodo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column
+	private Boolean preSelecionado;
+
+	@ManyToOne
+	private TipoImovel tipoImovel;
+
 	@ManyToOne
 	private TipoComodo tipoComodo;
-	
-	@Column
-	private String descricao;
-	
-	public Long getId() {
-		return id;
+
+	public TipoImovel getTipoImovel() {
+		return tipoImovel;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setTipoImovel(TipoImovel tipoImovel) {
+		this.tipoImovel = tipoImovel;
 	}
 
 	public TipoComodo getTipoComodo() {
@@ -45,6 +40,14 @@ public class Comodo implements Serializable{
 
 	public void setTipoComodo(TipoComodo tipoComodo) {
 		this.tipoComodo = tipoComodo;
+	}
+	
+	public Boolean getPreSelecionado() {
+		return preSelecionado;
+	}
+
+	public void setPreSelecionado(Boolean preSelecionado) {
+		this.preSelecionado = preSelecionado;
 	}
 
 	@Override
@@ -63,7 +66,7 @@ public class Comodo implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Comodo other = (Comodo) obj;
+		TipoImovelTipoComodo other = (TipoImovelTipoComodo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

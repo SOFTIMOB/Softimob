@@ -1,34 +1,34 @@
 package modelo;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Funcionario {
+public class TipoComodo implements Serializable{
 
-	public Funcionario() {
-	}
+	private static final long serialVersionUID = 1L;
 
-	public Funcionario(String nome) {
-		this.nome = nome;
-	}
-	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "O nome do funcionário não pode ser vazio")
+	@NotNull(message = "O nome do Cômodo não pode ser vazio")
 	@Column(nullable = false)
 	private String nome;
-	
-//	@NotNull(message = "Selecione um departamento.")
-//	@ManyToOne(optional=false)
-	private transient Departamento departamento;
 
+	@OneToMany(mappedBy = "id.tipoComodo")
+	private List<TipoImovelTipoComodo> tipoImovel;
+	
+	//Se quando cadastrar o imovel ele ja estar cadastrado
+	private Boolean preAdicionado;
+	
 	public Long getId() {
 		return id;
 	}
@@ -45,14 +45,22 @@ public class Funcionario {
 		this.nome = nome;
 	}
 
-	public Departamento getDepartamento() {
-		return departamento;
+	public List<TipoImovelTipoComodo> getTipoImovel() {
+		return tipoImovel;
 	}
 
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
+	public void setTipoImovel(List<TipoImovelTipoComodo> tipoImovel) {
+		this.tipoImovel = tipoImovel;
+	}
+	
+	public Boolean getPreAdicionado() {
+		return preAdicionado;
 	}
 
+	public void setPreAdicionado(Boolean preAdicionado) {
+		this.preAdicionado = preAdicionado;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -69,7 +77,7 @@ public class Funcionario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Funcionario other = (Funcionario) obj;
+		TipoComodo other = (TipoComodo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -77,5 +85,5 @@ public class Funcionario {
 			return false;
 		return true;
 	}
-	
+
 }

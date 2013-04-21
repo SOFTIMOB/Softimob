@@ -21,6 +21,13 @@
    </extension>
    <extension
          point="org.eclipse.ui.views">
+      <view
+            category="org.eclipse.ant.ui.views"
+            class="view.TipoComodoView"
+            id="view.TipoComodoView"
+            name="Cômodos"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.menus">

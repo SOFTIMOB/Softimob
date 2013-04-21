@@ -23,12 +23,15 @@ public class ReflectionHelper {
 	}
 	
 	public static boolean compare(Object obj, List<String> atributos, String palavra) throws Exception{
+		if(palavra == null || palavra.isEmpty())
+			return true;
+		
 		for (String atributo : atributos) {
 			Object dado = getAtribute(obj, atributo);
 			
 			if(dado instanceof Date) 
 				dado = FormatterHelper.getSimpleDateFormat().format(dado);
-			if(((String) dado).matches(palavra))
+			if(((String) dado).toLowerCase().matches(palavra))
 				return true;
 		}
 		return false;

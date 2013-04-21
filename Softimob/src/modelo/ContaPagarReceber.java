@@ -3,25 +3,47 @@ package modelo;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class ContaPagarReceber {
 
 	public static final char PAGAR = 'P';
 	public static final char RECEBER = 'R';
 	
+	@NotNull(message = "O valor da conta não pode ser vazio.")
+	@Column(precision = 14, scale = 2, nullable = false)
 	private BigDecimal valor;
 	
+	@Column(precision = 14, scale = 2)
 	private BigDecimal valorPagoParcial;
 	
+	@Column(precision = 14, scale = 2)
 	private BigDecimal valorJurosDesconto;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataConta;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataVencimento;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataPagamento;
-	
+
+	@ManyToOne
 	private OrigemConta origem;
 	
+	@NotNull(message = "Selecione o tipo da conta.")
+	@Column(length = 1, nullable = false)
 	private Character tipo;
 	
+	@ManyToOne
 	private MovimentacaoContabil movimentacao;
 
 	public BigDecimal getValor() {
@@ -88,7 +110,16 @@ public class ContaPagarReceber {
 		this.movimentacao = movimentacao;
 	}
 
+	public Date getDataConta() {
+		return dataConta;
+	}
+
+	public void setDataConta(Date dataConta) {
+		this.dataConta = dataConta;
+	}
+
 	public void efetuarBaixa(MovimentacaoContabil movimentacao2) {
+		// TODO Auto-generated method stub
 		
 	}
 	

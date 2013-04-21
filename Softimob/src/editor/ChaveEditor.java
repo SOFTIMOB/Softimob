@@ -1,17 +1,49 @@
 package editor;
 
+import helper.WidgetHelper;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import modelo.Chave;
+import modelo.Cliente;
+import modelo.Comodo;
+import modelo.HistoricoImovel;
+import modelo.Funcionario;
+import modelo.Imovel;
+import modelo.TipoComodo;
+import modelo.TipoImovel;
+
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.nebula.widgets.xviewer.XViewer;
+import org.eclipse.nebula.widgets.xviewer.XViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Tree;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+
+import de.ralfebert.rcputils.tables.TableViewerBuilder;
+
+import widget.imovel.ImovelXViewer;
+import widget.imovel.ImovelXViewerFactory;
 
 public class ChaveEditor extends SoftimobEditor {
 	
 	public static final String ID = "editor.ChaveEditor"; 
 	private Text text;
 	private Text text_1;
+	private Text txtBusca;
 	
 	public ChaveEditor() {
 	}
@@ -48,26 +80,119 @@ public class ChaveEditor extends SoftimobEditor {
 //		}
 	@Override
 	public void afterCreatePartControl(Composite parent) {
-		parent.setLayout(new GridLayout(2, false));
-		parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		Map<String, String> atributos = new HashMap<String, String>();
+		atributos.put("Nome", "nome");
+		atributos.put("CPF", "cpf");
+		atributos.put("RG", "rg");
 		
-		Label lblNmero = new Label(parent, SWT.NONE);
-		lblNmero.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblNmero.setText("Número");
+		Cliente c1 = new Cliente();
+		c1.setNome("Adalberto");
+		c1.setCpf("123456");
+		c1.setRg("56783");
 		
-		text = new Text(parent, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		Cliente c2 = new Cliente();
+		c2.setNome("Joao");
+		c2.setCpf("97877");
+		c2.setRg("63827136");
 		
-		Label lblImvel = new Label(parent, SWT.NONE);
-		lblImvel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblImvel.setText("Imóvel");
+		Cliente c3 = new Cliente();
+		c3.setNome("Joana");
+		c3.setCpf("73489274");
+		c3.setRg("732468");
 		
-		text_1 = new Text(parent, SWT.BORDER);
-		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+//		TableViewerBuilder tvb = WidgetHelper.createTableWithFilter(parent, atributos);
+
+//		tvb.setInput(Arrays.asList(c1, c2, c3));
+		
+//		parent.setLayout(new GridLayout(2, false));
+//		parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+//
+//		ImovelXViewer xViewer = new ImovelXViewer(parent, SWT.BORDER | SWT.FILL | SWT.FULL_SELECTION);
+//		//não mostra o menu no clique do botão direito
+//		xViewer.getMenuManager().dispose();
+//		//não mostra o menu de filtro e tal
+//		xViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
+//
+//		List<XViewerColumn> columns = new ImovelXViewerFactory().getColumns();
+//		String[] colunas = new String[columns.size()];
+//		for (int i = 0; i < columns.size(); i++) {
+//			colunas[i] = columns.get(i).getName();
+//		}
+//
+//		xViewer.setColumnProperties(colunas);
+//
+//		xViewer.setInput(cadastrarImoveis());
+//		
+//		
+//		Label lblNmero = new Label(parent, SWT.NONE);
+//		lblNmero.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+//		lblNmero.setText("Número");
+//		
+//		text = new Text(parent, SWT.BORDER);
+//		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+//		
+//		Label lblImvel = new Label(parent, SWT.NONE);
+//		lblImvel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+//		lblImvel.setText("Imóvel");
+//		
+//		text_1 = new Text(parent, SWT.BORDER);
+//		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 	}
 		
+	private List<Imovel> cadastrarImoveis() {
+		List<Imovel> imoveis = new ArrayList<Imovel>();
+		for(int i = 1 ; i < 10 ; i++){
+			Random r = new Random();
+
+			Imovel imovel = new Imovel();
+			
+			imovel.setCodigo(i + "");
+			imovel.setMetragem(new BigDecimal(i * 100));
+			imovel.setAngariador(new Funcionario("Adalberto " + i));
+			imovel.setTipo(new TipoImovel("Tipo "+i));
+			Cliente proprietario = new Cliente("Cliente "+i);
+			proprietario.setTelefone("432432432");
+			imovel.setProprietario(proprietario);
+			imovel.setStatus(2);
+			
+			List<Chave> chaves = new ArrayList<Chave>();
+			for(int f = 0; f < r.nextInt() * 3; f++){
+				Chave chave = new Chave(f + " - " + i);
+				chave.setImovel(imovel);
+				
+				chaves.add(chave);
+			}
+			imovel.setChaves(chaves);
+
+			List<Comodo> comodos = new ArrayList<Comodo>();
+			for(int f = 0; f < r.nextInt() * 3; f++){
+				Comodo comodo = new Comodo();
+				comodo.setDescricao("Comodo" + f);
+				
+				TipoComodo tipoComodo = new TipoComodo();
+				tipoComodo.setNome("Tipo comodo do comodo "+comodo.getDescricao());
+				comodo.setTipoComodo(tipoComodo);
+				
+				comodos.add(comodo);
+			}
+			imovel.setComodos(comodos);
+			
+			List<HistoricoImovel> historicos = new ArrayList<HistoricoImovel>();
+			for(int f = 0; f < r.nextInt() * 3; f++){
+				HistoricoImovel feedback = new HistoricoImovel();
+				feedback.setFeedback("Feedback "+f);
+				feedback.setData(new Date());
+				
+				historicos.add(feedback);
+			}
+			imovel.setFeedbacks(historicos);
+			
+			imoveis.add(imovel);
+		}
+		return imoveis;
+	}
+	
 	@Override
 	protected void salvar() {
 	}
-	
 }

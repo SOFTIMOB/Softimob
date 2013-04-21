@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.nebula.widgets.xviewer_0.9.9.201304181950.jar" sourcepath="C:/Users/Seven/Downloads/repository/home/data/httpd/download.eclipse.org/technology/nebula/snapshot/plugins/org.eclipse.nebula.widgets.xviewer.source_0.9.9.201304181950.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/postgresql-9.1-901.jdbc3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/hibernate-validator-5.0.0.CR5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/hibernate-validator-annotation-processor-5.0.0.CR5.jar"/>

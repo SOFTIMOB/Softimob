@@ -28,6 +28,7 @@ public abstract class SoftimobEditor extends EditorPart {
 		
 		Composite cpPrincipal = new Composite(composite, SWT.NONE);
 		cpPrincipal.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		cpPrincipal.setLayout(new GridLayout(2, false));
 		
 		Composite cpOpcoes = new Composite(composite, SWT.NONE);
 		cpOpcoes.setLayout(new GridLayout(2, false));
@@ -54,7 +55,7 @@ public abstract class SoftimobEditor extends EditorPart {
 		gd_btnCancelar.widthHint = 70;
 		btnCancelar.setLayoutData(gd_btnCancelar);
 		btnCancelar.setText("Cancelar");
-		
+
 		EnterHelper.addEnterNextControlToGroupOrComposite(parent);
 		
 		afterCreatePartControl(cpPrincipal);

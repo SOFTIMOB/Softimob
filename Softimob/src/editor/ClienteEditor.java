@@ -9,6 +9,12 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+
+import view.TipoComodoView;
+
+import editorInput.GenericEditorInput;
 
 public class ClienteEditor extends SoftimobEditor {
 	
@@ -132,11 +138,14 @@ public class ClienteEditor extends SoftimobEditor {
 		lblComplemento.setText("Complemento");
 		new Label(grpEndereo, SWT.NONE);
 	}
-	
 
 	@Override
 	protected void salvar() {
+		try {
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(TipoComodoView.ID);
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
 	}
 
-	
 }

@@ -12,6 +12,7 @@ import de.ralfebert.rcputils.tables.TableViewerBuilder;
 
 public class ClienteView extends ViewPart{
 	private Text text;
+	
 	public ClienteView() {
 	}
 
@@ -50,7 +51,5 @@ public class ClienteView extends ViewPart{
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-		
 	}
 }

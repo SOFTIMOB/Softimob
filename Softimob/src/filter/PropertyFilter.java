@@ -17,14 +17,21 @@ public class PropertyFilter extends ViewerFilter{
 		this.atributos = Arrays.asList(atributos);
 	}
 
+	public PropertyFilter(List<String> atributos) {
+		this.atributos = atributos;
+	}
+
 	public void setSearchText(String searchText) {
-		this.searchText = searchText;
+		this.searchText = ".*" + searchText + ".*";
 	}
 	
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
+		if(searchText == null || searchText.isEmpty())
+			return true;
+		
 		try {
-			return ReflectionHelper.compare(element, atributos, searchText);
+			return ReflectionHelper.compare(element, atributos, searchText.toLowerCase());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
