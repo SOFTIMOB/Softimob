@@ -1,4 +1,4 @@
-package daos;
+package persistencia;
 
 import org.hibernate.Session;
 

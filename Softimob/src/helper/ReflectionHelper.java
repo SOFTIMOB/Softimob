@@ -1,7 +1,6 @@
 package helper;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -22,7 +21,7 @@ public class ReflectionHelper {
 		return c.newInstance();
 	}
 	
-	public static boolean compare(Object obj, List<String> atributos, String palavra) throws Exception{
+	public static boolean compare(Object obj, String[] atributos, String palavra) throws Exception{
 		if(palavra == null || palavra.isEmpty())
 			return true;
 		

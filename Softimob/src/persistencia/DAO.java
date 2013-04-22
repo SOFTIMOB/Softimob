@@ -1,4 +1,4 @@
-package daos;
+package persistencia;
 
 import java.util.List;
 
@@ -18,6 +18,21 @@ public abstract class DAO {
 	}
 
 	public void operacaoBancoDados(Transacao transacao){
+		Session session = sessionFactory.openSession();
+		
+		Transaction trx = session.getTransaction();
+		trx.begin();
+		
+		try{
+			transacao.run(session);
+			
+			trx.commit();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+	
+	protected void delete(Transacao transacao){
 		Session session = sessionFactory.openSession();
 		
 		Transaction trx = session.getTransaction();

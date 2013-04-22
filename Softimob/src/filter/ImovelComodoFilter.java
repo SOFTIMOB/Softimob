@@ -11,7 +11,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.ui.dialogs.FilteredList.FilterMatcher;
 
-public class ImovelComodoFilter extends ViewerFilter implements FilterMatcher{
+public class ImovelComodoFilter extends GenericFilter implements FilterMatcher{
 
 
 	public ImovelComodoFilter(Map<String, TipoComodo> comodos) {
@@ -24,10 +24,6 @@ public class ImovelComodoFilter extends ViewerFilter implements FilterMatcher{
 	
 	public void setSelection(String selection){
 		this.selection = selection;
-	}
-	
-	public void setSearchString(String searchString){
-		this.searchString = ".*" + searchString + ".*";
 	}
 	
 	@Override
