@@ -20,10 +20,10 @@ public class TipoComodo implements Serializable{
 	private Long id;
 	
 	@NotNull(message = "O nome do Cômodo não pode ser vazio")
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nome;
 
-	@OneToMany(mappedBy = "id.tipoComodo")
+	@OneToMany
 	private List<TipoImovelTipoComodo> tipoImovel;
 	
 	//Se quando cadastrar o imovel ele ja estar cadastrado

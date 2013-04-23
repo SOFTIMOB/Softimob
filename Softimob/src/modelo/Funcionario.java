@@ -22,11 +22,11 @@ public class Funcionario {
 	private Long id;
 	
 	@NotNull(message = "O nome do funcionário não pode ser vazio")
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nome;
 	
-//	@NotNull(message = "Selecione um departamento.")
-//	@ManyToOne(optional=false)
+	@NotNull(message = "Selecione um departamento.")
+	@ManyToOne(optional=false)
 	private transient Departamento departamento;
 
 	public Long getId() {

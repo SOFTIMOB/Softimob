@@ -28,7 +28,7 @@ public class TipoImovel implements Serializable{
 	private Long id;
 	
 	@NotNull(message = "A descrição do tipo de imóvel não pode ser vazio.")
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String descricao;
 
 	@OneToMany
