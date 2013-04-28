@@ -25,10 +25,12 @@ public class TipoImovelEditor extends SoftimobEditor{
 		
 		Label lblTipoImvel = new Label(composite, SWT.NONE);
 		lblTipoImvel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblTipoImvel.setText("Tipo imóvel");
+		lblTipoImvel.setText("Descrição");
 		
 		text = new Text(composite, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+		gd_text.widthHint = 261;
+		text.setLayoutData(gd_text);
 	}
 
 	@Override

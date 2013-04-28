@@ -180,7 +180,7 @@ public class ChaveEditor extends SoftimobEditor {
 			Cliente proprietario = new Cliente("Cliente "+i);
 			proprietario.setTelefone("432432432");
 			imovel.setProprietario(proprietario);
-			imovel.setStatus(2);
+//			imovel.setStatus(2);
 			
 			List<Chave> chaves = new ArrayList<Chave>();
 			for(int f = 0; f < r.nextInt() * 3; f++){
@@ -207,7 +207,7 @@ public class ChaveEditor extends SoftimobEditor {
 			List<HistoricoImovel> historicos = new ArrayList<HistoricoImovel>();
 			for(int f = 0; f < r.nextInt() * 3; f++){
 				HistoricoImovel feedback = new HistoricoImovel();
-				feedback.setFeedback("Feedback "+f);
+//				feedback.setFeedback("Feedback "+f);
 				feedback.setData(new Date());
 				
 				historicos.add(feedback);

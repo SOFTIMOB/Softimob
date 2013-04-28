@@ -6,10 +6,12 @@ public class HistoricoImovel {
 
 	private Funcionario funcionario;
 	
-	private String feedback;
+	private String observacoes;
 	
 	private Date data;
 
+	private Cliente cliente;
+	
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
@@ -18,20 +20,28 @@ public class HistoricoImovel {
 		this.funcionario = funcionario;
 	}
 
-	public String getFeedback() {
-		return feedback;
-	}
-
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
-	}
-
 	public Date getData() {
 		return data;
 	}
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}
 	
 }

@@ -18,8 +18,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Imovel {
 
-	public static final int ALUGAR = 0;
-	public static final int VENDER = 1;
 	public static final int VENDIDO = 2;
 	public static final int ALUGADO = 3;
 	
@@ -41,9 +39,6 @@ public class Imovel {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Chave> chaves;
 	
-	@OneToOne
-	private Placa placa;
-	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private TipoImovel tipo;
 	
@@ -53,8 +48,13 @@ public class Imovel {
 	@OneToMany
 	private List<HistoricoImovel> feedbacks = new ArrayList<HistoricoImovel>();
 	
-	@Column
-	private Integer status;
+	private BigDecimal valor;
+	
+	private Boolean ocupado;
+	
+	private Boolean vender;
+	
+	private Boolean alugar;
 	
 	private transient Endereco endereco;
 	
@@ -99,28 +99,12 @@ public class Imovel {
 		this.chaves = chaves;
 	}
 
-	public Placa getPlaca() {
-		return placa;
-	}
-
-	public void setPlaca(Placa placa) {
-		this.placa = placa;
-	}
-
 	public TipoImovel getTipo() {
 		return tipo;
 	}
 
 	public void setTipo(TipoImovel tipo) {
 		this.tipo = tipo;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 
 	public Endereco getEndereco() {
@@ -178,6 +162,38 @@ public class Imovel {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public Boolean getVender() {
+		return vender;
+	}
+
+	public void setVender(Boolean vender) {
+		this.vender = vender;
+	}
+
+	public Boolean getAlugar() {
+		return alugar;
+	}
+
+	public void setAlugar(Boolean alugar) {
+		this.alugar = alugar;
+	}
+
+	public Boolean getOcupado() {
+		return ocupado;
+	}
+
+	public void setOcupado(Boolean ocupado) {
+		this.ocupado = ocupado;
 	}
 
 }

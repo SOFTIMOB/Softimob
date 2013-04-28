@@ -21,7 +21,7 @@ public class PlacaEditor extends SoftimobEditor{
 		
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		org.eclipse.swt.widgets.Label lblNmero = new org.eclipse.swt.widgets.Label(composite, SWT.NONE);
 		lblNmero.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));

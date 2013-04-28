@@ -29,6 +29,8 @@ public class ClienteEditor extends SoftimobEditor {
 	private Text text_4;
 	private Text text_6;
 	private Text text_8;
+	private Text text_9;
+	private Text text_10;
 	public ClienteEditor() {
 	}
 
@@ -115,28 +117,52 @@ public class ClienteEditor extends SoftimobEditor {
 		text_8.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblUf = new Label(grpEndereo, SWT.NONE);
+		lblUf.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblUf.setText("UF");
-		new Label(grpEndereo, SWT.NONE);
+		
+		ComboViewer comboViewer_1 = new ComboViewer(grpEndereo, SWT.NONE);
+		Combo combo_1 = comboViewer_1.getCombo();
+		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblCidade = new Label(grpEndereo, SWT.NONE);
+		lblCidade.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblCidade.setText("Cidade");
-		new Label(grpEndereo, SWT.NONE);
+		
+		ComboViewer comboViewer_2 = new ComboViewer(grpEndereo, SWT.NONE);
+		Combo combo_2 = comboViewer_2.getCombo();
+		combo_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblBairro = new Label(grpEndereo, SWT.NONE);
+		lblBairro.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblBairro.setText("Bairro");
-		new Label(grpEndereo, SWT.NONE);
+		
+		ComboViewer comboViewer_3 = new ComboViewer(grpEndereo, SWT.NONE);
+		Combo combo_3 = comboViewer_3.getCombo();
+		combo_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblRua = new Label(grpEndereo, SWT.NONE);
+		lblRua.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblRua.setText("Rua");
-		new Label(grpEndereo, SWT.NONE);
+		
+		ComboViewer comboViewer_4 = new ComboViewer(grpEndereo, SWT.NONE);
+		Combo combo_4 = comboViewer_4.getCombo();
+		combo_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblNmero = new Label(grpEndereo, SWT.NONE);
+		lblNmero.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblNmero.setText("Número");
-		new Label(grpEndereo, SWT.NONE);
+		
+		text_9 = new Text(grpEndereo, SWT.BORDER);
+		text_9.setText("");
+		text_9.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblComplemento = new Label(grpEndereo, SWT.NONE);
+		lblComplemento.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblComplemento.setText("Complemento");
-		new Label(grpEndereo, SWT.NONE);
+		
+		text_10 = new Text(grpEndereo, SWT.BORDER);
+		text_10.setText("");
+		text_10.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 	}
 
 	@Override

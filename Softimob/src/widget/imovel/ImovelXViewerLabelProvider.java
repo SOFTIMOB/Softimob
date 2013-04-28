@@ -37,8 +37,8 @@ public class ImovelXViewerLabelProvider extends XViewerLabelProvider {
 				return imovel.getCodigo();
 			if(xCol.equals(ImovelXViewerFactory.proprietario))
 				return imovel.getProprietario() == null ? "" : imovel.getProprietario().getNome();
-			if(xCol.equals(ImovelXViewerFactory.status))
-				return imovel.getStatus().toString();
+//			if(xCol.equals(ImovelXViewerFactory.status))
+//				return imovel.getStatus().toString();
 			if(xCol.equals(ImovelXViewerFactory.tipo))
 				return imovel.getTipo() == null ? "" : imovel.getTipo().getDescricao();
 		}else if(element instanceof Chave){
@@ -51,8 +51,8 @@ public class ImovelXViewerLabelProvider extends XViewerLabelProvider {
 				return FormatterHelper.getSimpleDateFormat().format(((HistoricoImovel)element).getData());
 			if(columnIndex == 1)
 				return ((HistoricoImovel)element).getFuncionario() == null ? "" : ((HistoricoImovel)element).getFuncionario().getNome();
-			if(columnIndex == 2)
-				return ((HistoricoImovel)element).getFeedback();
+//			if(columnIndex == 2)
+//				return ((HistoricoImovel)element).getFeedback();
 		}else if(element instanceof Comodo){
 			
 			if(columnIndex == 0)

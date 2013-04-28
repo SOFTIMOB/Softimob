@@ -36,5 +36,71 @@ public class Proposta {
 	
 	@ManyToOne
 	private Funcionario funcionario;
+
+	private String observacoes;
+	
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Proposta getContraProposta() {
+		return contraProposta;
+	}
+
+	public void setContraProposta(Proposta contraProposta) {
+		this.contraProposta = contraProposta;
+	}
+
+	public Imovel getImovel() {
+		return imovel;
+	}
+
+	public void setImovel(Imovel imovel) {
+		this.imovel = imovel;
+	}
+
+	public Cliente getComprador() {
+		return comprador;
+	}
+
+	public void setComprador(Cliente comprador) {
+		this.comprador = comprador;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
 	
 }

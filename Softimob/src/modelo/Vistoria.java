@@ -39,5 +39,61 @@ public class Vistoria {
 	
 	@Column
 	private String observacoes;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Byte getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(Byte arquivo) {
+		this.arquivo = arquivo;
+	}
+
+	public Cliente getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Cliente inquilino) {
+		this.inquilino = inquilino;
+	}
+
+	public Imovel getImovel() {
+		return imovel;
+	}
+
+	public void setImovel(Imovel imovel) {
+		this.imovel = imovel;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
 	
 }
