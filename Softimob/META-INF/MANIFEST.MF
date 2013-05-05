@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Softimob
-Bundle-SymbolicName: br.com.softimob.main;singleton:=true
+Bundle-SymbolicName: br.com.michelon.softimob;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: softimob.Activator
 Require-Bundle: org.eclipse.ui,
@@ -41,4 +41,3 @@ Bundle-ClassPath: .,
  lib/validation-api-1.1.0.CR3.jar,
  lib/postgresql-9.1-901.jdbc3.jar,
  lib/org.eclipse.nebula.widgets.xviewer_0.9.9.201304181950.jar
-Import-Package: org.eclipselabs.p2.rcpupdate.utils
