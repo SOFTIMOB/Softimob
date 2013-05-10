@@ -1,5 +1,6 @@
 package editor;
 
+import helper.FormatterHelper;
 import helper.ListElementDialogHelper;
 import modelo.Chave;
 import modelo.Cliente;
@@ -21,7 +22,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import de.ralfebert.rcputils.properties.BaseValue;
+import de.ralfebert.rcputils.properties.PropertyValue;
+import de.ralfebert.rcputils.properties.PropertyValueFormatter;
 import de.ralfebert.rcputils.tables.TableViewerBuilder;
+import de.ralfebert.rcputils.tables.format.Formatter;
+import de.ralfebert.rcputils.tables.format.StringValueFormatter;
+
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.widgets.Display;
@@ -38,6 +45,10 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.databinding.viewers.ViewerProperties;
 import modelo.TipoImovel;
 import java.math.BigDecimal;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+
 import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Slider;
 import org.eclipse.swt.widgets.Tree;
@@ -92,6 +103,18 @@ public class ImovelEditor extends SoftimobEditor{
 	private Text text;
 	private Text text_22;
 	private Text text_23;
+	private Text text_24;
+	private Text text_25;
+	private Text text_26;
+	private Text text_27;
+	private Text text_28;
+	private Text text_29;
+	private Text text_30;
+	private Text text_31;
+
+	private TableViewerBuilder tvbChamadoGeral;
+
+	private TableViewerBuilder tvbAndamentoChamado;
 	
 	public ImovelEditor() {
 	}
@@ -100,17 +123,10 @@ public class ImovelEditor extends SoftimobEditor{
 	public void afterCreatePartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		
-		CTabFolder tabFolder = new CTabFolder(parent, SWT.BORDER);
-		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
-		
-		CTabItem tbtmDescrio_1 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmDescrio_1.setText("Descrição");
-		
-		Composite composite = new Composite(tabFolder, SWT.NONE);
-		tbtmDescrio_1.setControl(composite);
-		GridLayout gl_composite = new GridLayout(8, false);
-		gl_composite.verticalSpacing = 10;
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		GridLayout gl_composite = new GridLayout(6, false);
+		gl_composite.verticalSpacing = 8;
 		composite.setLayout(gl_composite);
 		
 		Label lblCdigo = new Label(composite, SWT.NONE);
@@ -118,9 +134,17 @@ public class ImovelEditor extends SoftimobEditor{
 		lblCdigo.setText("Código");
 		
 		text_21 = new Text(composite, SWT.BORDER);
-		GridData gd_text_21 = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+		GridData gd_text_21 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_text_21.widthHint = 101;
 		text_21.setLayoutData(gd_text_21);
+		
+		Label lblProprietario = new Label(composite, SWT.NONE);
+		lblProprietario.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblProprietario.setText("Proprietário");
+		
+		txtProprietario = new Text(composite, SWT.BORDER);
+		txtProprietario.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		ListElementDialogHelper.addListElementDialogToText(txtProprietario, value , "proprietario");
 		
 		Label lblTipoImvel = new Label(composite, SWT.NONE);
 		lblTipoImvel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -130,41 +154,24 @@ public class ImovelEditor extends SoftimobEditor{
 		Combo combo_4 = comboViewer_4.getCombo();
 		combo_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
+		Label lblValor = new Label(composite, SWT.NONE);
+		lblValor.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblValor.setText("Valor");
+		
+		text_4 = new Text(composite, SWT.BORDER);
+		
 		Label lblAngariad = new Label(composite, SWT.NONE);
 		lblAngariad.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblAngariad.setText("Angariador");
 		
 		text_2 = new Text(composite, SWT.BORDER);
-		text_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-		
-		Button button_6 = new Button(composite, SWT.NONE);
-		button_6.setText("Selecionar");
-		
-		Label lblProprietario = new Label(composite, SWT.NONE);
-		lblProprietario.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblProprietario.setText("Proprietário");
-		
-		txtProprietario = new Text(composite, SWT.BORDER);
-		txtProprietario.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-		ListElementDialogHelper.addListElementDialogToText(txtProprietario, value , "proprietario");
-		
-		Button btnSelecionar_3 = new Button(composite, SWT.NONE);
-		btnSelecionar_3.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-		btnSelecionar_3.setText("Selecionar");
+		text_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblMetragem = new Label(composite, SWT.NONE);
 		lblMetragem.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblMetragem.setText("Metragem");
 		
 		text_5 = new Text(composite, SWT.BORDER);
-		text_5.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblValor = new Label(composite, SWT.NONE);
-		lblValor.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblValor.setText("Valor");
-		
-		text_4 = new Text(composite, SWT.BORDER);
-		text_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblFotos = new Label(composite, SWT.NONE);
 		lblFotos.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -173,24 +180,19 @@ public class ImovelEditor extends SoftimobEditor{
 		text_3 = new Text(composite, SWT.BORDER);
 		text_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
-		Button button_7 = new Button(composite, SWT.NONE);
-		button_7.setText("Selecionar");
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
+		Button button_5 = new Button(composite, SWT.NONE);
+		button_5.setText("Selecionar");
 		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
 		
 		Label lblObservaes_3 = new Label(composite, SWT.NONE);
-		lblObservaes_3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblObservaes_3.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
 		lblObservaes_3.setText("Observações");
 		
 		text_6 = new Text(composite, SWT.BORDER);
-		GridData gd_text_6 = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
+		GridData gd_text_6 = new GridData(SWT.FILL, SWT.CENTER, true, false, 4, 1);
 		gd_text_6.heightHint = 43;
 		text_6.setLayoutData(gd_text_6);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
 		
@@ -202,79 +204,28 @@ public class ImovelEditor extends SoftimobEditor{
 		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
 		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
 		
-		Group grpEndereo = new Group(composite, SWT.NONE);
-		grpEndereo.setLayout(new GridLayout(4, false));
-		grpEndereo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 8, 1));
-		grpEndereo.setText("Endereço");
+		CTabFolder tabFolder = new CTabFolder(parent, SWT.BORDER);
+		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		
-		Label lblCep = new Label(grpEndereo, SWT.NONE);
-		lblCep.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCep.setText("CEP");
+		CTabItem tbtmDescrio_1 = new CTabItem(tabFolder, SWT.NONE);
+		tbtmDescrio_1.setText("Cômodos");
 		
-		text = new Text(grpEndereo, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(grpEndereo, SWT.NONE);
-		new Label(grpEndereo, SWT.NONE);
-		
-		Label lblUf_1 = new Label(grpEndereo, SWT.NONE);
-		lblUf_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblUf_1.setText("UF");
-		
-		ComboViewer comboViewer_5 = new ComboViewer(grpEndereo, SWT.READ_ONLY);
-		Combo combo_5 = comboViewer_5.getCombo();
-		combo_5.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblCidadeEndereco = new Label(grpEndereo, SWT.NONE);
-		lblCidadeEndereco.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCidadeEndereco.setText("Cidade");
-		
-		ComboViewer comboViewer_7 = new ComboViewer(grpEndereo, SWT.READ_ONLY);
-		Combo combo_7 = comboViewer_7.getCombo();
-		combo_7.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblBairro_1 = new Label(grpEndereo, SWT.NONE);
-		lblBairro_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblBairro_1.setText("Bairro");
-		
-		ComboViewer comboViewer_6 = new ComboViewer(grpEndereo, SWT.READ_ONLY);
-		Combo combo_6 = comboViewer_6.getCombo();
-		combo_6.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblRua = new Label(grpEndereo, SWT.NONE);
-		lblRua.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblRua.setText("Rua");
-		
-		ComboViewer comboViewer_8 = new ComboViewer(grpEndereo, SWT.READ_ONLY);
-		Combo combo_8 = comboViewer_8.getCombo();
-		combo_8.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblNmero_2 = new Label(grpEndereo, SWT.NONE);
-		lblNmero_2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblNmero_2.setText("Número");
-		
-		text_22 = new Text(grpEndereo, SWT.BORDER);
-		text_22.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblComplemento_1 = new Label(grpEndereo, SWT.NONE);
-		lblComplemento_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblComplemento_1.setText("Complemento");
-		
-		text_23 = new Text(grpEndereo, SWT.BORDER);
-		text_23.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Group grpCmodos = new Group(composite, SWT.NONE);
+		Composite composite_5 = new Composite(tabFolder, SWT.NONE);
+		tbtmDescrio_1.setControl(composite_5);
+		composite_5.setLayout(new GridLayout(1, false));
+				
+		Group grpCmodos = new Group(composite_5, SWT.NONE);
+		grpCmodos.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		grpCmodos.setLayout(new GridLayout(2, false));
-		grpCmodos.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 8, 1));
 		grpCmodos.setText("Cômodos");
 		
 		Composite composite_10 = new Composite(grpCmodos, SWT.NONE);
 		composite_10.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 2));
 		
 		criarTabelaComodo(composite_10);
-
+		
 		Button btnAdicionar = new Button(grpCmodos, SWT.NONE);
 		btnAdicionar.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, true, 1, 1));
 		btnAdicionar.setText("Adicionar");
@@ -289,7 +240,6 @@ public class ImovelEditor extends SoftimobEditor{
 		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		tbtmEndereo.setControl(composite_1);
 		GridLayout gl_composite_1 = new GridLayout(3, false);
-		gl_composite_1.verticalSpacing = 10;
 		composite_1.setLayout(gl_composite_1);
 		
 		Label lblCep_1 = new Label(composite_1, SWT.NONE);
@@ -342,7 +292,7 @@ public class ImovelEditor extends SoftimobEditor{
 		lblNmero.setText("Número");
 		
 		text_7 = new Text(composite_1, SWT.BORDER);
-		GridData gd_text_7 = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+		GridData gd_text_7 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_text_7.widthHint = 98;
 		text_7.setLayoutData(gd_text_7);
 		new Label(composite_1, SWT.NONE);
@@ -369,10 +319,10 @@ public class ImovelEditor extends SoftimobEditor{
 		
 		Button btnNovo = new Button(composite_2, SWT.NONE);
 		btnNovo.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, true, 1, 1));
-		btnNovo.setText("Novo");
+		btnNovo.setText("Adicionar");
 		
 		Button btnRemover_3 = new Button(composite_2, SWT.NONE);
-		btnRemover_3.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
+		btnRemover_3.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, true, 1, 1));
 		btnRemover_3.setText("Remover");
 		
 		Group grpChave = new Group(composite_2, SWT.NONE);
@@ -425,7 +375,6 @@ public class ImovelEditor extends SoftimobEditor{
 		
 		Group grpNovoHistrico = new Group(composite_3, SWT.NONE);
 		GridLayout gl_grpNovoHistrico = new GridLayout(3, false);
-		gl_grpNovoHistrico.verticalSpacing = 10;
 		grpNovoHistrico.setLayout(gl_grpNovoHistrico);
 		grpNovoHistrico.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 		grpNovoHistrico.setText("Histórico");
@@ -499,7 +448,6 @@ public class ImovelEditor extends SoftimobEditor{
 		grpProposta.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 		grpProposta.setText("Proposta");
 		GridLayout gl_grpProposta = new GridLayout(3, false);
-		gl_grpProposta.verticalSpacing = 10;
 		grpProposta.setLayout(gl_grpProposta);
 		
 		Label lblData = new Label(grpProposta, SWT.NONE);
@@ -577,7 +525,6 @@ public class ImovelEditor extends SoftimobEditor{
 		
 		Group grpVistoria = new Group(composite_8, SWT.NONE);
 		GridLayout gl_grpVistoria = new GridLayout(3, false);
-		gl_grpVistoria.verticalSpacing = 10;
 		grpVistoria.setLayout(gl_grpVistoria);
 		grpVistoria.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		grpVistoria.setText("Vistoria");
@@ -636,6 +583,200 @@ public class ImovelEditor extends SoftimobEditor{
 		btnSalvar_3.setLayoutData(gd_btnSalvar_3);
 		btnSalvar_3.setText("Salvar");
 		
+		CTabItem tbtmChamada = new CTabItem(tabFolder, SWT.NONE);
+		tbtmChamada.setText("Chamados");
+		
+		Composite composite_6 = new Composite(tabFolder, SWT.NONE);
+		tbtmChamada.setControl(composite_6);
+		composite_6.setLayout(new GridLayout(1, false));
+		
+		Composite composite_7 = new Composite(composite_6, SWT.NONE);
+		composite_7.setLayout(new GridLayout(1, false));
+		composite_7.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Composite composite_9 = new Composite(composite_6, SWT.NONE);
+		composite_9.setLayout(new GridLayout(1, false));
+		composite_9.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		CTabFolder tabFolder_1 = new CTabFolder(composite_9, SWT.BORDER);
+		tabFolder_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		tabFolder_1.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		
+		CTabItem tbtmAbertura = new CTabItem(tabFolder_1, SWT.NONE);
+		tbtmAbertura.setText("Abertura");
+		
+		Composite composite_11 = new Composite(tabFolder_1, SWT.NONE);
+		tbtmAbertura.setControl(composite_11);
+		composite_11.setLayout(new GridLayout(3, false));
+		
+		Label lblNmero_2 = new Label(composite_11, SWT.NONE);
+		lblNmero_2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNmero_2.setText("Número");
+		
+		text = new Text(composite_11, SWT.BORDER);
+		text.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		new Label(composite_11, SWT.NONE);
+		
+		Label lblData_3 = new Label(composite_11, SWT.NONE);
+		lblData_3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblData_3.setText("Data");
+		
+		DateTime dateTime_3 = new DateTime(composite_11, SWT.BORDER);
+		new Label(composite_11, SWT.NONE);
+		
+		Label lblCliente_1 = new Label(composite_11, SWT.NONE);
+		lblCliente_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblCliente_1.setText("Cliente");
+		
+		text_22 = new Text(composite_11, SWT.BORDER);
+		text_22.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Button btnSelecionar_3 = new Button(composite_11, SWT.NONE);
+		btnSelecionar_3.setText("Selecionar");
+		
+		Label lblFuncionrio_2 = new Label(composite_11, SWT.NONE);
+		lblFuncionrio_2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblFuncionrio_2.setText("Funcionário");
+		
+		text_23 = new Text(composite_11, SWT.BORDER);
+		text_23.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Button btnSelecionar_4 = new Button(composite_11, SWT.NONE);
+		btnSelecionar_4.setText("Selecionar");
+		
+		Label lblDescrio = new Label(composite_11, SWT.NONE);
+		lblDescrio.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
+		lblDescrio.setText("Descrição");
+		
+		text_24 = new Text(composite_11, SWT.BORDER);
+		GridData gd_text_24 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_text_24.heightHint = 70;
+		text_24.setLayoutData(gd_text_24);
+		new Label(composite_11, SWT.NONE);
+		new Label(composite_11, SWT.NONE);
+		
+		Button btnAdicionar_1 = new Button(composite_11, SWT.NONE);
+		GridData gd_btnAdicionar_1 = new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1);
+		gd_btnAdicionar_1.widthHint = 74;
+		gd_btnAdicionar_1.heightHint = 39;
+		btnAdicionar_1.setLayoutData(gd_btnAdicionar_1);
+		btnAdicionar_1.setText("Adicionar");
+		new Label(composite_11, SWT.NONE);
+		
+		CTabItem tbAndamento = new CTabItem(tabFolder_1, SWT.NONE);
+		tbAndamento.setText("Andamento");
+		
+		Composite composite_12 = new Composite(tabFolder_1, SWT.NONE);
+		tbAndamento.setControl(composite_12);
+		composite_12.setLayout(new GridLayout(5, false));
+		
+		Composite composite_14 = new Composite(composite_12, SWT.NONE);
+		composite_14.setLayout(new GridLayout(1, false));
+		composite_14.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 4, 1));
+		new Label(composite_12, SWT.NONE);
+		
+		Label lblData_4 = new Label(composite_12, SWT.NONE);
+		lblData_4.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblData_4.setText("Data");
+		
+		text_25 = new Text(composite_12, SWT.BORDER);
+		
+		Label lblHorrio = new Label(composite_12, SWT.NONE);
+		lblHorrio.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblHorrio.setText("Horário");
+		
+		text_26 = new Text(composite_12, SWT.BORDER);
+		text_26.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 2, 1));
+		
+		Label lblFuncionrio_3 = new Label(composite_12, SWT.NONE);
+		lblFuncionrio_3.setText("Funcionário");
+		
+		text_27 = new Text(composite_12, SWT.BORDER);
+		GridData gd_text_27 = new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1);
+		gd_text_27.widthHint = 133;
+		text_27.setLayoutData(gd_text_27);
+		
+		Button btnSelecionar_5 = new Button(composite_12, SWT.NONE);
+		btnSelecionar_5.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		btnSelecionar_5.setText("Selecionar");
+		
+		Label lblDescrio_1 = new Label(composite_12, SWT.NONE);
+		lblDescrio_1.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
+		lblDescrio_1.setText("Descrição");
+		
+		text_28 = new Text(composite_12, SWT.BORDER);
+		GridData gd_text_28 = new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1);
+		gd_text_28.widthHint = 643;
+		gd_text_28.heightHint = 85;
+		text_28.setLayoutData(gd_text_28);
+		new Label(composite_12, SWT.NONE);
+		new Label(composite_12, SWT.NONE);
+		new Label(composite_12, SWT.NONE);
+		new Label(composite_12, SWT.NONE);
+		new Label(composite_12, SWT.NONE);
+		
+		Button btnSalvar_1 = new Button(composite_12, SWT.NONE);
+		GridData gd_btnSalvar_1 = new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 1, 1);
+		gd_btnSalvar_1.heightHint = 39;
+		gd_btnSalvar_1.widthHint = 75;
+		btnSalvar_1.setLayoutData(gd_btnSalvar_1);
+		btnSalvar_1.setText("Salvar");
+		
+		CTabItem tbtmFinalizar = new CTabItem(tabFolder_1, SWT.NONE);
+		tbtmFinalizar.setText("Finalizar");
+		
+		Composite composite_13 = new Composite(tabFolder_1, SWT.NONE);
+		tbtmFinalizar.setControl(composite_13);
+		composite_13.setLayout(new GridLayout(4, false));
+		
+		Label lblData_5 = new Label(composite_13, SWT.NONE);
+		lblData_5.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblData_5.setText("Data");
+		
+		text_29 = new Text(composite_13, SWT.BORDER);
+		new Label(composite_13, SWT.NONE);
+		new Label(composite_13, SWT.NONE);
+		
+		Label lblFuncionrio_4 = new Label(composite_13, SWT.NONE);
+		lblFuncionrio_4.setText("Funcionário");
+		
+		text_30 = new Text(composite_13, SWT.BORDER);
+		GridData gd_text_30 = new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1);
+		gd_text_30.widthHint = 455;
+		text_30.setLayoutData(gd_text_30);
+		
+		Button btnSelecionar_6 = new Button(composite_13, SWT.NONE);
+		btnSelecionar_6.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		btnSelecionar_6.setText("Selecionar");
+		new Label(composite_13, SWT.NONE);
+		
+		Button btnAceito = new Button(composite_13, SWT.RADIO);
+		btnAceito.setText("Aceito");
+		
+		Button btnRecusado = new Button(composite_13, SWT.RADIO);
+		btnRecusado.setText("Recusado");
+		new Label(composite_13, SWT.NONE);
+		
+		Label lblDescrio_2 = new Label(composite_13, SWT.NONE);
+		lblDescrio_2.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
+		lblDescrio_2.setText("Descrição");
+		
+		text_31 = new Text(composite_13, SWT.BORDER);
+		GridData gd_text_31 = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		gd_text_31.heightHint = 105;
+		text_31.setLayoutData(gd_text_31);
+		new Label(composite_13, SWT.NONE);
+		new Label(composite_13, SWT.NONE);
+		new Label(composite_13, SWT.NONE);
+		
+		Button btnFecharChamado = new Button(composite_13, SWT.NONE);
+		GridData gd_btnFecharChamado = new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1);
+		gd_btnFecharChamado.widthHint = 74;
+		gd_btnFecharChamado.heightHint = 42;
+		btnFecharChamado.setLayoutData(gd_btnFecharChamado);
+		btnFecharChamado.setText("Fechar");
+		new Label(composite_13, SWT.NONE);
+		
 		value.setValue(new Imovel());
 		
 		initDataBindings();
@@ -650,7 +791,7 @@ public class ImovelEditor extends SoftimobEditor{
 	private void criarTabelaComodo(Composite composite){
 		tvbComodo = new TableViewerBuilder(composite);
 		
-		tvbComodo.createColumn("Comodo").bindToProperty("tipoComodo.nome").build();
+		tvbComodo.createColumn("Cômodo").bindToProperty("tipoComodo.nome").build();
 		tvbComodo.createColumn("Descrição").bindToProperty("descricao").makeEditable().build();
 	}
 	
@@ -661,6 +802,24 @@ public class ImovelEditor extends SoftimobEditor{
 		tvbHistorico.createColumn("Funcionário").bindToProperty("funcionario.nome").build();
 		tvbHistorico.createColumn("Cliente").bindToProperty("cliente.nome").build();
 		tvbHistorico.createColumn("Observações").setPercentWidth(60).bindToProperty("observacoes").build();
+	}
+	
+	private void criarTabelaChamadosGerais(Composite composite){
+		tvbChamadoGeral = new TableViewerBuilder(composite);
+		
+		tvbChamadoGeral.createColumn("Numero").bindToProperty("numero").build();
+		tvbChamadoGeral.createColumn("Data").bindToProperty("dataAbertura").format(Formatter.forDate(FormatterHelper.getSimpleDateFormat())).build();
+		tvbChamadoGeral.createColumn("Cliente").bindToProperty("inquilino.nome").build();
+		tvbChamadoGeral.createColumn("Problema").bindToProperty("problema").build();
+		tvbChamadoGeral.createColumn("Status").bindToProperty("status").build();
+	}
+	
+	private void criarTabelaAndamentoChamado(Composite composite){
+		tvbAndamentoChamado = new TableViewerBuilder(composite);
+		
+		tvbAndamentoChamado.createColumn("Data").bindToProperty("data").format(Formatter.forDate(FormatterHelper.getSimpleDateFormat())).build();
+		tvbAndamentoChamado.createColumn("Funcionário").bindToProperty("funcionario.nome").build();
+		tvbAndamentoChamado.createColumn("Descrição").bindToProperty("descricao").build();
 	}
 	
 	private void criarTabelaVistoria(Composite composite){
@@ -675,7 +834,7 @@ public class ImovelEditor extends SoftimobEditor{
 
 	private void criarTabelaProposta(Composite composite){
 		tvbProposta = new TableViewerBuilder(composite);
-		
+			
 		tvbProposta.createColumn("Data de vistoria").bindToProperty("data").build();
 		tvbProposta.createColumn("Valor").bindToProperty("valor").build();
 		tvbProposta.createColumn("Cliente").bindToProperty("cliente.nome").build();
